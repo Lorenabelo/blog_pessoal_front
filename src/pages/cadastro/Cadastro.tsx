@@ -3,10 +3,13 @@ import Usuario from '../../models/Usuario'
 import './Cadastro.css'
 import { cadastrarUsuario } from '../../services/service';
 import { useNavigate } from 'react-router-dom';
+import { RotatingLines } from 'react-loader-spinner';
 
 export default function Cadastro() {
 
   const navigate = useNavigate();
+
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
@@ -40,17 +43,22 @@ export default function Cadastro() {
   async function handleSubmit (event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (usuario.senha === confirmPassword && usuario.senha.length >= 8) {
+
+      setLoading(true);
+
       try {
         await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuario);
         alert('Usuário cadastrado com sucesso!');
       } catch (error) {
         alert('Erro ao cadastrar o usuário');
       }
+
     }else{
       alert('Dados incosistentes! Verifique os dados do usuário.');
       setUsuario({...usuario, senha: ''});
       setConfirmPassword('');
     }
+    setLoading(false);
   }
 
   return (
@@ -124,7 +132,13 @@ export default function Cadastro() {
               Cancelar
             </button>
             <button className='rounded text-white bg-indigo-400 hover:bg-indigo-900 w-1/2 py-2' type='submit'>
-              Cadastrar
+            {
+              isLoading ? (
+                <RotatingLines strokeColor='white' strokeWidth='5' animationDuration='0.75' width='24' visible={true}/>
+              ) : (
+                <span>Cadastrar</span>
+              )
+            }
             </button>
           </div>
         </form>
