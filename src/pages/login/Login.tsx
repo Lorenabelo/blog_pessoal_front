@@ -72,7 +72,7 @@ function Login() {
 
           <hr className="border-slate-800 w-full" />
 
-          <Link to="/" className='hover:underline'>Ainda não tem uma conta?</Link>
+          <Link to="/cadastro" className='hover:underline'>Ainda não tem uma conta?</Link>
         </form>
         <div className="fundoLogin hidden lg:block"></div>
       </div>

@@ -6,7 +6,7 @@ export default function Navbar() {
 
     const navigate = useNavigate();
 
-    const { handleLogout} = useContext(AuthContext);
+    const { usuario, handleLogout} = useContext(AuthContext);
 
 
 
@@ -25,13 +25,17 @@ export default function Navbar() {
                     <Link to="/" className="text-2xl font-bold">Blog Pessoal</Link>
 
                     <div className='flex gap-4'>
-                        <Link to='/login' className='hover:underline'>Login</Link>
                         <Link to='/home' className='hover:underline'>Home</Link>
-                        <div className='hover:underline'>Postagens</div>
+                        <Link to='/postagens' className='hover:underline'>Postagens</Link>
                         <Link to="/temas" className='hover:underline'>Temas</Link>
                         <Link to="/cadastrotema" className='hover:underline'>Cadastrar tema</Link>
                         <div className='hover:underline'>Perfil</div>
-                        <Link to="" onClick={logout} className='hover:underline'>Sair</Link>
+                        {
+                            usuario.token?
+                            <Link to="" onClick={logout} className='hover:underline'>Sair</Link>
+                            :
+                            <Link to='/login' className='hover:underline'>Login</Link>
+                        }
                     </div>
                 </div>
             </div>
