@@ -6,6 +6,7 @@ import Tema from '../../../models/Tema';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { buscar } from '../../../services/service';
 import { DNA } from 'react-loader-spinner';
+import { ToastAlerta } from '../../../utils/ToastAlert';
 
 function ListaTemas() {
   
@@ -26,7 +27,7 @@ function ListaTemas() {
       })
     } catch (error: any) {
       if(error.toString().includes('401')){
-        alert('Token expirado!');
+        ToastAlerta('Token expirado!', 'info');
         handleLogout();
       }
     }
@@ -34,7 +35,7 @@ function ListaTemas() {
 
   useEffect(() => {
     if(token === ''){
-      alert('Você precisa estar logado!');
+      ToastAlerta('Você precisa estar logado!', 'info');
       navigate('/login');
     }
   }, [token])

@@ -5,6 +5,7 @@ import Postagem from "../../../models/Postagem";
 import { DNA } from "react-loader-spinner";
 import CardPostagens from "../cardpostagens/CardPostagens";
 import { buscar } from "../../../services/service";
+import { ToastAlerta } from "../../../utils/ToastAlert";
 
 function ListaPostagens() {
 
@@ -32,7 +33,7 @@ function ListaPostagens() {
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado')
+            ToastAlerta('Você precisa estar logado', 'info')
             navigate('/');
         }
     }, [token])
@@ -53,7 +54,7 @@ function ListaPostagens() {
                     wrapperClass="dna-wrapper mx-auto"
                 />
             )}
-            <div className='container mx-auto my-4 
+            <div className='container mx-auto m-4 
                 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'
             >
                 {postagens.map((postagem) => (

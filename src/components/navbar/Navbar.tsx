@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { ToastAlerta } from "../../utils/ToastAlert";
 
 export default function Navbar() {
 
@@ -12,7 +13,7 @@ export default function Navbar() {
 
     const logout = () => {
         handleLogout();
-        alert('O usuário foi desconectado com sucesso!');
+        ToastAlerta('O usuário foi desconectado com sucesso!', 'sucesso');
         navigate('/login');
     }
 
@@ -25,16 +26,17 @@ export default function Navbar() {
                     <Link to="/" className="text-2xl font-bold">Blog Pessoal</Link>
 
                     <div className='flex gap-4'>
-                        <Link to='/home' className='hover:underline'>Home</Link>
-                        <Link to='/postagens' className='hover:underline'>Postagens</Link>
-                        <Link to="/temas" className='hover:underline'>Temas</Link>
-                        <Link to="/cadastrotema" className='hover:underline'>Cadastrar tema</Link>
-                        <div className='hover:underline'>Perfil</div>
                         {
-                            usuario.token?
-                            <Link to="" onClick={logout} className='hover:underline'>Sair</Link>
-                            :
-                            <Link to='/login' className='hover:underline'>Login</Link>
+                            usuario.token && (
+                                <div className='flex gap-4'>
+                                    <Link to='/home' className='hover:underline'>Home</Link>
+                                    <Link to='/postagens' className='hover:underline'>Postagens</Link>
+                                    <Link to="/temas" className='hover:underline'>Temas</Link>
+                                    <Link to="/cadastrotema" className='hover:underline'>Cadastrar tema</Link>
+                                    <Link to='/perfil' className='hover:underline'>Perfil</Link>
+                                    <Link to="" onClick={logout} className='hover:underline'>Sair</Link>
+                                </div>
+                            )
                         }
                     </div>
                 </div>
