@@ -56,7 +56,7 @@ export function AuthProvider({children}: AuthProviderProps){
             usuario,
             handleLogout,
             handleLogin,
-            isLoading
+            isLoading: () => isLoading
         }}>
             {children}
         </AuthContext.Provider>
