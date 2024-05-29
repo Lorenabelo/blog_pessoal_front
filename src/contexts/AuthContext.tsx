@@ -7,7 +7,7 @@ interface AuthContextProps {
     usuario: UsuarioLogin;
     handleLogout(): void;
     handleLogin(usuario: UsuarioLogin): Promise<void>;
-    isLoading(): boolean;
+    isLoading: boolean;
 }
 
 interface AuthProviderProps {
